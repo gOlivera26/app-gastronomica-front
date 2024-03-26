@@ -17,4 +17,14 @@ export interface Usuario {
     id: number;
     descripcion: string;
   }
+
+  export interface updateUsuarioRequest{
+    id: number; 
+    nombre: string;
+    apellido: string;
+    nroDoc: string;
+    email: string;
+    telefono: string;
+    idRol: Rol;
+  }
   

@@ -1,0 +1,76 @@
+/* Estilos para los botones */
+button.mat-button {
+    margin-right: 8px; /* Añadir espacio entre los botones */
+    border: none; /* Eliminar el borde */
+    outline: none; /* Eliminar el contorno al hacer clic */
+    cursor: pointer; /* Cambiar el cursor */
+    padding: 8px 16px; /* Ajustar el padding */
+    border-radius: 3px; /* Agregar bordes redondeados */
+    transition: all 0.3s ease; /* Agregar una transición suave */
+    font-size: 14px; /* Ajustar el tamaño del texto */
+}
+
+button.mat-button[color="primary"] {
+    background-color: #1976d2; /* Color de fondo del botón primario */
+    color: white; /* Color de texto del botón primario */
+}
+
+button.mat-button[color="warn"] {
+    background-color: #d32f2f; /* Color de fondo del botón de advertencia */
+    color: white; /* Color de texto del botón de advertencia */
+}
+
+button.mat-button:hover {
+    filter: brightness(0.8); /* Ajustar el brillo al pasar el ratón sobre los botones */
+}
+
+button.mat-button:active {
+    transform: translateY(2px); /* Desplazar ligeramente hacia abajo al hacer clic */
+}
+
+
+/* Estilos para el contenedor del perfil de usuario */
+.user-profile-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para la imagen de perfil */
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+/* Estilos para el área de carga de imagen */
+.upload-placeholder {
+    border: 2px dashed rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #888;
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1;
+    border-radius: 10px;
+}
+
+/* Estilos para los campos del formulario */
+.user-details mat-form-field {
+    margin-bottom: 16px; /* Añadir margen inferior a los campos del formulario */
+    margin-right: 5px; /* Añadir margen derecho a los campos del formulario */
+}
+
+/* Estilos para el icono de edición de imagen */
+.edit-profile-image {
+    cursor: pointer; /* Cambiar el cursor al pasar el ratón sobre el icono */
+    transition: transform 0.3s ease; /* Agregar una transición suave */
+}
+
+.edit-profile-image:hover {
+    transform: scale(1.1); /* Escalar el icono al pasar el ratón sobre él */
+}
+
+.edit-profile-image:active {
+    transform: scale(0.9); /* Escalar el icono cuando se presiona */
+}

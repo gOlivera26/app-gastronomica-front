@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ForgotPasswordRequest, ForgotPasswordResponse, LoginRequest, LoginResponse, UpdateCredentialsRequest, UpdateCredentialsResponse } from '../models/models';
-import { Usuario } from '../models/usuario';
+import { Usuario, updateUsuarioRequest } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,21 @@ export class RestService {
   updatePassword(request: UpdateCredentialsResponse): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/auth/update-password`, request, { responseType: 'text' });
   }
-  
 
   //usuario service
   getImagenProfile(request: string): Observable<any>{
     return this.httpClient.get(`${this.baseUrl}/usuarios/obtenerImagenProfile/${request}`, {responseType: 'text'});
+  }
+  getUsuario(request: string): Observable<Usuario>{
+    return this.httpClient.get<Usuario>(`${this.baseUrl}/usuarios/obtenerUsuarioPorUsername/${request}`);
+  }
+  getRoles(): Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/usuarios/obtenerRoles`);
+  }
+  putImagenProfile(username: string, image: any): Observable<any>{
+    return this.httpClient.put(`${this.baseUrl}/usuarios/agregarImagenProfile/${username}/imagen`, image, { responseType: 'text' });
+  }
+  updateUsuario(usuario: updateUsuarioRequest): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}/auth/updateUsuario`, usuario);
   }
 }

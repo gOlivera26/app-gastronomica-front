@@ -2,6 +2,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
+import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,18 +27,18 @@ import { UsuarioService } from '../services/usuario.service';
 })
 export class AppComponent implements OnInit {
   title = 'app-gastronomica';
-  isLoggedIn = false; 
-  isHomeComponent = false; 
+  isLoggedIn = false;
+  isHomeComponent = false;
   userProfileImage: string | ArrayBuffer | null = null;
   username!: string; // Variable para almacenar el nombre de usuario
   userRole!: string; // Variable para almacenar el rol del usuario
-  
+  userProfileImageSubscription: Subscription | undefined;
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {}
+  constructor(private router: Router, private usuarioService: UsuarioService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.isLoggedIn = !!localStorage.getItem('token');
-  
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isLoggedIn = !!localStorage.getItem('token');
@@ -57,24 +60,42 @@ export class AppComponent implements OnInit {
         }
       }
     });
+
+    this.userProfileImageSubscription = this.usuarioService.userProfileImage$.subscribe(
+      (image: string | null) => {
+        this.userProfileImage = image;
+      }
+    );
   }
-  
+
+  ngOnDestroy() {
+    if (this.userProfileImageSubscription) {
+      this.userProfileImageSubscription.unsubscribe();
+    }
+  }
+
   getUserProfileImage(username: string) {
     this.usuarioService.getImagenProfile(username).subscribe(
       (data: string) => {
         this.userProfileImage = 'data:image/jpeg;base64,' + data;
-        console.log('Imagen de perfil cargada:', this.userProfileImage);
       },
       error => {
         console.error('Error al obtener la imagen del perfil:', error);
       }
     );
   }
-  
+
+  openUserDetailsModal() {
+    const dialogRef = this.dialog.open(VerDetallesUsuarioComponent, {
+      width: '500px',
+      data: { username: this.username } // Pasar el nombre de usuario al modal
+    });
+  }
+
   logout() {
-    localStorage.removeItem('token'); 
+    localStorage.removeItem('token');
     this.isLoggedIn = false;
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
   showUserProfile() {
@@ -82,7 +103,7 @@ export class AppComponent implements OnInit {
   }
 
   viewProfile() {
-    // Abre el diálogo para ver los detalles del perfil del usuario
+    this.openUserDetailsModal();
   }
 
   onLoginButtonClick() {
@@ -91,5 +112,5 @@ export class AppComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
-  } 
+  }
 }
