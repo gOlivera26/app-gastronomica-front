@@ -1,0 +1,20 @@
+<div class="verification-code-container">
+    <h2><span></span>Verificación de Código</h2>
+    <form [formGroup]="verificationCodeForm" (ngSubmit)="submit()" class="verification-code-form">
+      <div class="input-container">
+        <mat-form-field>
+          <input matInput placeholder="Código de Verificación" formControlName="verificationCode" required>
+          <mat-error *ngIf="verificationCodeForm.get('verificationCode')?.invalid">
+            Por favor ingresa el código de verificación.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="verificationCodeForm.invalid">
+        Enviar
+      </button>
+      <button mat-icon-button color="warn" class="cancel-button" (click)="cancel()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </form>
+  </div>
+  

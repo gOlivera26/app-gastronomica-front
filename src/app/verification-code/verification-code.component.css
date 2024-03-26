@@ -1,0 +1,28 @@
+/* Estilos específicos para el formulario de verificación de código */
+.verification-code-container {
+    background-color: rgba(39, 39, 40, 0.126);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .verification-code-container h2 {
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  .verification-code-form .input-container {
+    margin-bottom: 20px; /* Agrega espacio entre el input y el botón */
+  }
+  
+  .verification-code-form .cancel-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+  }
+  
+  .verification-code-form .cancel-button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="login-container">
+    <h1 class="center-text">¡Bienvenido de nuevo!</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+      <mat-form-field class="form-field" [ngClass]="{'is-invalid': loginForm.get('username')?.invalid && loginForm.get('username')?.touched}">
+        <input matInput placeholder="Usuario" formControlName="username" class="styled-input">
+        <mat-error class="bubble" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          El nombre de usuario es requerido
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="form-field" [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+        <input matInput type="password" placeholder="Contraseña" formControlName="password" class="styled-input">
+        <mat-error class="bubble" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          La contraseña es requerida
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="btn btn-animated styled-button">
+        Iniciar sesión
+      </button>
+    </form>
+    <button mat-button color="primary" class="forgot-password-button" (click)="abrirForgotPassword()">¿Olvidaste tu contraseña?</button>
+  </div>
+</div>

@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Estilos globales */
+.modal-container {
+    background-color: rgba(39, 39, 40, 0.126);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .cancel-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+  }
+  
+  .cancel-button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  

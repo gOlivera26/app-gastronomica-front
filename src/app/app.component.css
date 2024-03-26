@@ -1,0 +1,88 @@
+/* Estilos para el toolbar transparente */
+.transparent-toolbar {
+    background-color: rgba(0, 0, 0, 0.7) !important; /* Color negro con opacidad del 70% */
+    color: white !important; /* Color del texto */
+    font-weight: bold; /* Texto en negrita */
+    justify-content: flex-end !important; /* Alinear los elementos al final del toolbar */
+}
+
+/* Estilos para los botones en el toolbar */
+.transparent-toolbar button {
+    color: white !important; /* Color del texto */
+}
+
+/* Estilos para el contenedor de la imagen de fondo */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/img/background.png'); /* Reemplaza 'path/to/your/image.jpg' con la ruta de tu imagen en assets */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Estilos para el contenido */
+.content {
+    padding-top: 64px; /* Ajusta según la altura del toolbar */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Color del texto */
+}
+
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+  
+  .menu-visible {
+    animation: slideIn 0.3s ease forwards;
+  }
+  
+  .menu-hidden {
+    animation: slideOut 0.3s ease forwards;
+  }
+  
+
+/* Estilos para la imagen de perfil en el menú desplegable */
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px; /* Espacio entre la imagen y el texto "Ver detalles" */
+}
+
+/* Estilos para los botones en el menú desplegable */
+.mat-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px; /* Ajustar según sea necesario */
+}
+
+/* Estilos para el menú desplegable */
+.mat-menu-panel {
+    width: 300px; /* Ancho del menú desplegable */
+    max-height: 300px; /* Altura máxima del menú desplegable */
+    overflow-y: auto; /* Habilitar el desplazamiento vertical si el contenido excede la altura máxima */
+}
