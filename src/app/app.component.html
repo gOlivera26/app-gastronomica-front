@@ -1,26 +1,27 @@
 <mat-toolbar class="transparent-toolbar">
-  <button mat-button routerLink="/homeUser" *ngIf="isLoggedIn && isHomeComponent">
+  <!-- Si está autenticado, siempre muestra estos botones -->
+  <button mat-button routerLink="/homeUser" *ngIf="isLoggedIn">
     Home
   </button>
-  <button mat-button routerLink="/componente1" *ngIf="isLoggedIn && isHomeComponent">
+  <button mat-button routerLink="/componente1" *ngIf="isLoggedIn">
     Componente 1
   </button>
-  <button mat-button routerLink="/componente2" *ngIf="isLoggedIn && isHomeComponent">
+  <button mat-button routerLink="/componente2" *ngIf="isLoggedIn">
     Componente 2
   </button>
-  <button mat-button routerLink="/componente3" *ngIf="isLoggedIn && isHomeComponent">
+  <button mat-button routerLink="/componente3" *ngIf="isLoggedIn">
     Componente 3
   </button>
 
   <span class="example-spacer"></span>
 
   <!-- Botón para el menú desplegable del usuario -->
-  <button mat-button *ngIf="isLoggedIn && isHomeComponent" [matMenuTriggerFor]="userMenu">
+  <button mat-button *ngIf="isLoggedIn" [matMenuTriggerFor]="userMenu">
     {{ isLoggedIn ? username : '' }} <mat-icon>arrow_drop_down</mat-icon>
   </button>
 
   <!-- Botón de inicio de sesión -->
-  <button mat-button (click)="onLoginButtonClick()" *ngIf="!isLoggedIn && !isHomeComponent">
+  <button mat-button (click)="onLoginButtonClick()" *ngIf="!isLoggedIn">
     Iniciar sesión
   </button>
 </mat-toolbar>
@@ -32,10 +33,14 @@
 </div>
 
 <!-- Menú desplegable para el perfil del usuario -->
-<mat-menu #userMenu="matMenu" [@menuAnimation]="isLoggedIn && isHomeComponent ? 'visible' : 'hidden'">
-  <button mat-menu-item (click)="viewProfile()">
-    <img *ngIf="userProfileImage" [src]="userProfileImage" alt="User profile" class="profile-image">
+<mat-menu #userMenu="matMenu" [@menuAnimation]="isLoggedIn ? 'visible' : 'hidden'">
+  <button mat-menu-item *ngIf="userProfileImage" (click)="viewProfile()">
+    <img [src]="userProfileImage" alt="User profile" class="profile-image">
     <strong> Ver Usuario</strong>
   </button>
+  <button mat-menu-item *ngIf="!userProfileImage" (click)="viewProfile()">
+    <strong>{{ username }}</strong>
+  </button>
+  <!-- Opción para cerrar sesión -->
   <button mat-menu-item (click)="logout()">Cerrar sesión</button>
 </mat-menu>

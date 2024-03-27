@@ -30,6 +30,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatMenuModule} from '@angular/material/menu';
 import { AuthInterceptor } from '../services/interceptor/interceptor';
 import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
+import { ListadoUsuariosComponent } from './listado-usuarios/listado-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles
     ForgotPasswordComponent,
     ResetPasswordComponent,
     VerificationCodeComponent,
-    VerDetallesUsuarioComponent
+    VerDetallesUsuarioComponent,
+    ListadoUsuariosComponent
   ],
   imports: [
     BrowserModule,

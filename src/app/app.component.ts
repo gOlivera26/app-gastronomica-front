@@ -2,9 +2,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
-import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
 
 @Component({
   selector: 'app-root',
@@ -28,10 +28,10 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'app-gastronomica';
   isLoggedIn = false;
-  isHomeComponent = false;
+  isHomeComponent = false; // Agrega esta línea para inicializar isHomeComponent
   userProfileImage: string | ArrayBuffer | null = null;
-  username!: string; // Variable para almacenar el nombre de usuario
-  userRole!: string; // Variable para almacenar el rol del usuario
+  username!: string; //almacenar el nombre de usuario
+  userRole!: string; //almacenar el rol del usuario
   userProfileImageSubscription: Subscription | undefined;
 
   constructor(private router: Router, private usuarioService: UsuarioService, private dialog: MatDialog) {}
@@ -39,10 +39,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn = !!localStorage.getItem('token');
 
+    // Suscribirse a los eventos de enrutamiento para actualizar isHomeComponent
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isLoggedIn = !!localStorage.getItem('token');
-        this.isHomeComponent = this.router.url === '/homeUser';
+        this.isHomeComponent = this.router.url === '/homeUser'; // Actualiza isHomeComponent según la ruta actual
         if (this.isLoggedIn) {
           const token = localStorage.getItem('token');
           if (token) {
