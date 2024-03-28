@@ -16,6 +16,10 @@ export class UsuarioService {
   private userProfileImageSubject = new BehaviorSubject<string | null>(null);
   userProfileImage$: Observable<string | null> = this.userProfileImageSubject.asObservable();
 
+  private usuariosSubject = new BehaviorSubject<Usuario[]>([]);
+  usuarios$: Observable<Usuario[]> = this.usuariosSubject.asObservable();
+
+
   constructor(private httpClient: HttpClient, private restService: RestService) { }
 
   getImagenProfile(request: string): Observable<any>{
@@ -53,4 +57,15 @@ export class UsuarioService {
   updateUsuario(usuario: updateUsuarioRequest): Observable<any> {
     return this.restService.updateUsuario(usuario);
   }
+  getUsuarios(): Observable<Usuario[]> {
+    return this.restService.getUsuarios().pipe(
+      tap((usuarios: Usuario[]) => {
+        this.usuariosSubject.next(usuarios);
+      })
+    );
+  }
+  bajaUsuario(nroDoc: string): Observable<boolean> {
+    return this.restService.bajaUsuario(nroDoc);
+  }
+  
 }

@@ -1,54 +1,57 @@
 <div class="modal-container">
-  <h2>Detalles del Usuario</h2>
-  
-  <div class="user-profile-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
-    <img *ngIf="userProfileImage" [src]="userProfileImage" alt="User profile" class="profile-image">
-    <div *ngIf="isEditMode && userProfileImage" class="upload-placeholder">
-      <p>Seleccione la imagen o arrástrela aquí</p>
+  <div class="modal-content">
+    <h2>Detalles del Usuario</h2>
+    
+    <div class="user-profile-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+      <img *ngIf="userProfileImage" [src]="userProfileImage" alt="User profile" class="profile-image">
+      <div *ngIf="isEditMode && userProfileImage" class="upload-placeholder">
+        <p>Seleccione la imagen o arrástrela aquí</p>
+      </div>
+      <label for="fileInput" *ngIf="isEditMode" class="edit-profile-image">
+        <mat-icon>edit</mat-icon>
+      </label>
+      <input type="file" style="display: none" id="fileInput" #fileInput (change)="handleFileInput($event)">
     </div>
-    <label for="fileInput" *ngIf="isEditMode" class="edit-profile-image">
-      <mat-icon>edit</mat-icon>
-    </label>
-    <input type="file" style="display: none" id="fileInput" #fileInput (change)="handleFileInput($event)">
+    <form [formGroup]="userDetailsForm">
+      <div class="user-details">
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Nombre" formControlName="nombre">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Apellido</mat-label>
+          <input matInput placeholder="Apellido" formControlName="apellido">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Número de Documento</mat-label>
+          <input matInput placeholder="Número de Documento" formControlName="nroDoc">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Teléfono</mat-label>
+          <input matInput placeholder="Teléfono" formControlName="telefono">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="rol">
+            <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.descripcion }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+    
+    <div class="modal-actions">
+      <!-- Mostrar el botón "Editar Usuario" o "Guardar Cambios" según el modo de edición -->
+      <button class="mat-button" color="primary" (click)="isEditMode ? onSaveChanges() : toggleEditMode()">
+        {{ isEditMode ? 'Guardar Cambios' : 'Editar Usuario' }}
+      </button>
+      <!-- Botón para cancelar -->
+      <button class="mat-button" color="warn" *ngIf="isEditMode" (click)="toggleEditMode()">Cancelar</button>
+      <!-- Botón para cerrar el modal -->
+      <button class="mat-button" (click)="onClose()">Cerrar</button>
+    </div>
   </div>
-  <form [formGroup]="userDetailsForm">
-    <div class="user-details">
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Nombre" formControlName="nombre">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Apellido</mat-label>
-        <input matInput placeholder="Apellido" formControlName="apellido">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" formControlName="email">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Número de Documento</mat-label>
-        <input matInput placeholder="Número de Documento" formControlName="nroDoc">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Teléfono</mat-label>
-        <input matInput placeholder="Teléfono" formControlName="telefono">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Rol</mat-label>
-        <mat-select formControlName="rol">
-          <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.descripcion }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </form>
-</div>
-<div class="modal-actions">
-  <!-- Mostrar el botón "Editar Usuario" o "Guardar Cambios" según el modo de edición -->
-  <button class="mat-button" color="primary" (click)="isEditMode ? onSaveChanges() : toggleEditMode()">
-    {{ isEditMode ? 'Guardar Cambios' : 'Editar Usuario' }}
-  </button>
-  <!-- Botón para cancelar -->
-  <button class="mat-button" color="warn" *ngIf="isEditMode" (click)="toggleEditMode()">Cancelar</button>
-  <!-- Botón para cerrar el modal -->
-  <button class="mat-button" (click)="onClose()">Cerrar</button>
 </div>

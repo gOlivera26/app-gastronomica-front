@@ -28,7 +28,6 @@ button.mat-button:active {
     transform: translateY(2px); /* Desplazar ligeramente hacia abajo al hacer clic */
 }
 
-
 /* Estilos para el contenedor del perfil de usuario */
 .user-profile-container {
     display: flex;
@@ -56,9 +55,16 @@ button.mat-button:active {
 }
 
 /* Estilos para los campos del formulario */
+.user-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    grid-template-rows: repeat(3, auto); /* Tres filas */
+    grid-gap: 10px; /* Espacio entre las filas y columnas */
+    margin-top: 20px; /* Margen superior para separar los campos del formulario */
+}
+
 .user-details mat-form-field {
-    margin-bottom: 16px; /* Añadir margen inferior a los campos del formulario */
-    margin-right: 5px; /* Añadir margen derecho a los campos del formulario */
+    width: 100%; /* Ajustar el ancho de los campos al 100% */
 }
 
 /* Estilos para el icono de edición de imagen */
@@ -73,4 +79,54 @@ button.mat-button:active {
 
 .edit-profile-image:active {
     transform: scale(0.9); /* Escalar el icono cuando se presiona */
+}
+
+/* Estilos para el modal container */
+/* Estilos para el modal container */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.900); /* Fondo transparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra para resaltar el modal */
+    max-width: 80%; /* Ancho máximo del contenido del modal */
+    display: grid;
+    grid-template-columns: auto 1fr; /* Dos columnas, la primera se ajusta automáticamente */
+    grid-template-rows: repeat(3, auto); /* Tres filas */
+    grid-gap: 10px; /* Espacio entre las filas y columnas */
+}
+
+
+.modal-content .user-profile-container {
+    grid-row: span 3; /* Ocupar tres filas */
+    grid-column: 1; /* Primera columna */
+}
+
+.modal-content .user-details {
+    grid-row: span 3; /* Ocupar tres filas */
+    grid-column: 2; /* Segunda columna */
+}
+
+.modal-content .user-details mat-form-field {
+    margin-right: 0; /* Eliminar el margen derecho para que se ajuste completamente */
+}
+
+.modal-actions {
+    margin-top: 20px; /* Margen superior para los botones del modal */
+    display: flex;
+    justify-content: flex-end;
+}
+h2{
+    color: white;
 }

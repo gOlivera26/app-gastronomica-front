@@ -42,4 +42,10 @@ export class RestService {
   updateUsuario(usuario: updateUsuarioRequest): Observable<any> {
     return this.httpClient.put(`${this.baseUrl}/auth/updateUsuario`, usuario);
   }
+  getUsuarios(): Observable<any> {
+    return this.httpClient.get<Usuario>(`${this.baseUrl}/usuarios/obtenerUsuarios`);
+  }
+  bajaUsuario(nroDoc: string): Observable<boolean> {
+    return this.httpClient.put<boolean>(`${this.baseUrl}/usuarios/bajaUsuario/${nroDoc}`, null);
+  }
 }

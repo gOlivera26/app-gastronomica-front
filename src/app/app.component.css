@@ -31,7 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Color del texto */
+    color: white; 
 }
 
 @keyframes slideIn {
