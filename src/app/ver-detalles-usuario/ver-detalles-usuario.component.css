@@ -82,7 +82,6 @@ button.mat-button:active {
 }
 
 /* Estilos para el modal container */
-/* Estilos para el modal container */
 .modal-container {
     position: fixed;
     top: 0;
@@ -109,24 +108,25 @@ button.mat-button:active {
 
 
 .modal-content .user-profile-container {
-    grid-row: span 3; /* Ocupar tres filas */
-    grid-column: 1; /* Primera columna */
+    grid-row: span 3; 
+    grid-column: 1; 
 }
 
 .modal-content .user-details {
-    grid-row: span 3; /* Ocupar tres filas */
-    grid-column: 2; /* Segunda columna */
+    grid-row: span 3; 
+    grid-column: 2;
 }
 
 .modal-content .user-details mat-form-field {
-    margin-right: 0; /* Eliminar el margen derecho para que se ajuste completamente */
+    margin-right: 0; 
 }
 
 .modal-actions {
-    margin-top: 20px; /* Margen superior para los botones del modal */
+    margin-top: 20px; 
     display: flex;
     justify-content: flex-end;
 }
 h2{
     color: white;
+    justify-content: center;
 }
