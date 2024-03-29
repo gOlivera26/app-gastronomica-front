@@ -67,5 +67,12 @@ export class UsuarioService {
   bajaUsuario(nroDoc: string): Observable<boolean> {
     return this.restService.bajaUsuario(nroDoc);
   }
+  getUsuarioFiltroActivo(activo: boolean):Observable<Usuario[]> {
+    return this.restService.getUsuarioFiltroActivo(activo).pipe(
+      tap((usuarios: Usuario[]) =>{
+        this.usuariosSubject.next(usuarios);
+      })
+    );
+  }
   
 }

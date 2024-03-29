@@ -1,10 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
+import { AuthService } from '../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -25,35 +27,32 @@ import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'app-gastronomica';
   isLoggedIn = false;
-  isHomeComponent = false; // Agrega esta línea para inicializar isHomeComponent
+  isHomeComponent = false;
   userProfileImage: string | ArrayBuffer | null = null;
-  username!: string; //almacenar el nombre de usuario
-  userRole!: string; //almacenar el rol del usuario
+  username!: string;
+  userRole!: string;
   userProfileImageSubscription: Subscription | undefined;
 
-  constructor(private router: Router, private usuarioService: UsuarioService, private dialog: MatDialog) {}
+  constructor(private router: Router, private usuarioService: UsuarioService, private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
-    this.isLoggedIn = !!localStorage.getItem('token');
+    this.authService.loggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
 
-    // Suscribirse a los eventos de enrutamiento para actualizar isHomeComponent
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isLoggedIn = !!localStorage.getItem('token');
-        this.isHomeComponent = this.router.url === '/homeUser'; // Actualiza isHomeComponent según la ruta actual
+        this.isHomeComponent = this.router.url === '/homeUser';
         if (this.isLoggedIn) {
           const token = localStorage.getItem('token');
           if (token) {
             const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-            console.log(tokenPayload.role); // La descripción del rol del usuario
-
-            this.username = tokenPayload.sub; // Extraer el nombre de usuario del campo 'sub'
-            console.log('username extraido' + this.username);
-            this.userRole = tokenPayload.role; // Asumiendo que 'role' contiene la descripción del rol
-            console.log('role extraido' + this.userRole);
+            this.username = tokenPayload.sub;
+            this.userRole = tokenPayload.role;
             if (this.username) {
               this.getUserProfileImage(this.username);
             }
@@ -89,18 +88,35 @@ export class AppComponent implements OnInit {
   openUserDetailsModal() {
     const dialogRef = this.dialog.open(VerDetallesUsuarioComponent, {
       width: '500px',
-      data: { username: this.username } // Pasar el nombre de usuario al modal
+      data: { username: this.username }
     });
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.isLoggedIn = false;
-    this.router.navigate(['/']);
-  }
-
-  showUserProfile() {
-    // Muestra el menú desplegable para el perfil del usuario
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Estás seguro de que quieres cerrar la sesión?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cerrar sesión!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('token');
+        this.isLoggedIn = false;
+        this.router.navigate(['/']);
+  
+        Swal.fire({
+          title: 'Sesión cerrada',
+          text: 'Has cerrado la sesión exitosamente.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    })
   }
 
   viewProfile() {

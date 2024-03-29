@@ -31,6 +31,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AuthInterceptor } from '../services/interceptor/interceptor';
 import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
 import { ListadoUsuariosComponent } from './listado-usuarios/listado-usuarios.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ListadoUsuariosComponent } from './listado-usuarios/listado-usuarios.co
     MatInputModule,
     MatCardModule,
     MatMenuModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltip
   ],
   providers: [
     provideAnimationsAsync(),

@@ -64,7 +64,7 @@ button.mat-button:active {
 }
 
 .user-details mat-form-field {
-    width: 100%; /* Ajustar el ancho de los campos al 100% */
+    width: 100%; 
 }
 
 /* Estilos para el icono de edición de imagen */
@@ -99,7 +99,7 @@ button.mat-button:active {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra para resaltar el modal */
-    max-width: 80%; /* Ancho máximo del contenido del modal */
+    max-width: 70%; /* Ancho máximo del contenido del modal */
     display: grid;
     grid-template-columns: auto 1fr; /* Dos columnas, la primera se ajusta automáticamente */
     grid-template-rows: repeat(3, auto); /* Tres filas */
@@ -128,5 +128,5 @@ button.mat-button:active {
 }
 h2{
     color: white;
-    justify-content: center;
+    
 }

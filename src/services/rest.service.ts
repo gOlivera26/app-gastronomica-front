@@ -48,4 +48,7 @@ export class RestService {
   bajaUsuario(nroDoc: string): Observable<boolean> {
     return this.httpClient.put<boolean>(`${this.baseUrl}/usuarios/bajaUsuario/${nroDoc}`, null);
   }
+  getUsuarioFiltroActivo(activo: boolean): Observable<any>{
+    return this.httpClient.get<boolean>(`${this.baseUrl}/usuarios/obtenerUsuarioPorEstado/${activo}`);
+  }
 }

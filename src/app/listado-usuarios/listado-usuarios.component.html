@@ -1,58 +1,61 @@
-<mat-table [dataSource]="dataSource" matSort class="custom-table">
+<div class="mat-elevation-z8">
+  <div class="filter-buttons">
+    <mat-label>Filtrar por Estado:</mat-label>
+    <button mat-button (click)="filtrarUsuariosPorEstado(null)">Quitar filtro</button>
+    <button mat-button (click)="filtrarUsuariosPorEstado(true)">Activo</button>
+    <button mat-button (click)="filtrarUsuariosPorEstado(false)">Desactivado</button>
+  </div>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-      <mat-cell *matCellDef="let usuario">{{ usuario.id }}</mat-cell>
-    </ng-container>
-  
+  <mat-table [dataSource]="dataSource" matSort class="custom-table">
+
     <!-- Nombre Column -->
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.nombre }}</mat-cell>
     </ng-container>
-  
+
     <!-- Apellido Column -->
     <ng-container matColumnDef="apellido">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.apellido }}</mat-cell>
     </ng-container>
-  
+
     <!-- Username Column -->
     <ng-container matColumnDef="username">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.username }}</mat-cell>
     </ng-container>
-  
+
     <!-- Email Column -->
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.email }}</mat-cell>
     </ng-container>
-  
+
     <!-- NroDoc Column -->
     <ng-container matColumnDef="nroDoc">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Número de Documento</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.nroDoc }}</mat-cell>
     </ng-container>
-  
+
     <!-- Teléfono Column -->
     <ng-container matColumnDef="telefono">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.telefono }}</mat-cell>
     </ng-container>
-  
-<!-- Activo Column -->
-<ng-container matColumnDef="activo">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Activo</mat-header-cell>
-    <mat-cell *matCellDef="let usuario">
-      <button mat-icon-button [color]="usuario.activo ? 'primary' : 'warn'" (click)="bajaUsuario(usuario)">
-        <mat-icon>{{ usuario.activo ? 'person' : 'person_outline' }}</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-  
-  
+
+    <!-- Activo Column -->
+    <ng-container matColumnDef="activo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Activo</mat-header-cell>
+      <mat-cell *matCellDef="let usuario">
+        <button mat-icon-button [color]="usuario.activo ? 'primary' : 'warn'"
+                [matTooltip]="usuario.activo ? 'Desactivar usuario' : 'Activar usuario'"
+                (click)="bajaUsuario(usuario)">
+          <mat-icon>{{ usuario.activo ? 'person' : 'person_outline' }}</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
     <!-- Acciones Column -->
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
@@ -65,10 +68,22 @@
         </button>
       </mat-cell>
     </ng-container>
-  
+
+    <ng-container matColumnDef="filtroEstado">
+      <mat-header-cell *matHeaderCellDef colspan="8">
+        <mat-form-field appearance="fill" class="filter-by-state">
+          <mat-select (selectionChange)="filtrarUsuariosPorEstado($event.value)">
+            <mat-option *ngFor="let estado of [null, true, false]" [value]="estado">
+              {{ estado === null ? 'Todos' : estado ? 'Activos' : 'Desactivados' }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-header-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  
+
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-  
+</div>

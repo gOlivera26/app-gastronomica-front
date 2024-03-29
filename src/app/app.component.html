@@ -1,5 +1,4 @@
 <mat-toolbar class="transparent-toolbar">
-  <!-- Si está autenticado, siempre muestra estos botones -->
   <button mat-button routerLink="/homeUser" *ngIf="isLoggedIn">
     Home
   </button>
@@ -15,12 +14,11 @@
 
   <span class="example-spacer"></span>
 
-  <!-- Botón para el menú desplegable del usuario -->
   <button mat-button *ngIf="isLoggedIn" [matMenuTriggerFor]="userMenu">
-    {{ isLoggedIn ? username : '' }} <mat-icon>arrow_drop_down</mat-icon>
+    {{ username }} <mat-icon>arrow_drop_down</mat-icon>
   </button>
 
-  <!-- Botón de inicio de sesión -->
+
   <button mat-button (click)="onLoginButtonClick()" *ngIf="!isLoggedIn">
     Iniciar sesión
   </button>
@@ -41,6 +39,5 @@
   <button mat-menu-item *ngIf="!userProfileImage" (click)="viewProfile()">
     <strong>{{ username }}</strong>
   </button>
-  <!-- Opción para cerrar sesión -->
   <button mat-menu-item (click)="logout()">Cerrar sesión</button>
 </mat-menu>

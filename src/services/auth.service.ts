@@ -10,10 +10,13 @@ import { RestService } from './rest.service';
 })
 export class AuthService {
   
+  private statusLogin = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.statusLogin.asObservable();
 
   constructor(private httpClient: HttpClient, private restService: RestService) { }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
+    this.statusLogin.next(true);
     return this.restService.login(loginRequest);
   }
   forgotPassword(request: ForgotPasswordRequest): Observable<any> {

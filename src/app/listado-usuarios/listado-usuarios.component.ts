@@ -11,7 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class ListadoUsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'username', 'email', 'nroDoc', 'telefono', 'activo', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'username', 'email', 'nroDoc', 'telefono', 'activo', 'acciones'];
   dataSource = new MatTableDataSource<Usuario>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -22,16 +22,28 @@ export class ListadoUsuariosComponent implements OnInit {
     this.loadUsuarios();
   }
 
-  loadUsuarios() {
-    this.usuarioService.getUsuarios().subscribe(
-      (usuarios: Usuario[]) => {
-        this.dataSource.data = usuarios;
-        this.dataSource.paginator = this.paginator;
-      },
-      error => {
-        console.log('Error al obtener usuarios:', error);
-      }
-    );
+  loadUsuarios(activo: boolean | null = null) {
+    if (activo !== null) {
+      this.usuarioService.getUsuarioFiltroActivo(activo).subscribe(
+        (usuarios: Usuario[]) => {
+          this.dataSource.data = usuarios;
+          this.dataSource.paginator = this.paginator;
+        },
+        error => {
+          console.log('Error al obtener usuarios:', error);
+        }
+      );
+    } else {
+      this.usuarioService.getUsuarios().subscribe(
+        (usuarios: Usuario[]) => {
+          this.dataSource.data = usuarios;
+          this.dataSource.paginator = this.paginator;
+        },
+        error => {
+          console.log('Error al obtener usuarios:', error);
+        }
+      );
+    }
   }
 
   editarUsuario(usuario: Usuario) {
@@ -45,16 +57,20 @@ export class ListadoUsuariosComponent implements OnInit {
   }
 
   bajaUsuario(usuario: Usuario) {
-    this.usuarioService.bajaUsuario(usuario.nroDoc).subscribe(
-      (activo: boolean) => {
+    const subscriptionOptions = {
+      next: (activo: boolean) => {
         usuario.activo = activo;
-        console.log('Usuario activo:', activo);
-        // Actualizar la lista de usuarios después de activar o desactivar
+        console.log('Usuario activo: ', activo)
         this.loadUsuarios();
       },
-      error => {
+      error: (error: any) => {
         console.log('Error al activar o desactivar usuario:', error);
       }
-    );
+    };
+    this.usuarioService.bajaUsuario(usuario.nroDoc).subscribe(subscriptionOptions);
+  }
+
+  filtrarUsuariosPorEstado(activo: boolean | null) {
+    this.loadUsuarios(activo);
   }
 }
