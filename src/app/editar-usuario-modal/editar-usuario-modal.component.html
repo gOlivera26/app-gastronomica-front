@@ -1,0 +1,72 @@
+<div class="modal-container">
+    <div class="modal-content">
+      <form [formGroup]="userDetailsForm">
+        <h2>Detalles del usuario</h2>
+        <div class="user-details">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="nombre" [ngClass]="{ 'is-invalid': userDetailsForm.get('nombre')?.invalid && userDetailsForm.get('nombre')?.touched }">
+            <mat-error *ngIf="userDetailsForm.get('nombre')?.invalid && userDetailsForm.get('nombre')?.touched">
+              El nombre es requerido.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input matInput placeholder="Apellido" formControlName="apellido" [ngClass]="{ 'is-invalid': userDetailsForm.get('apellido')?.invalid && userDetailsForm.get('apellido')?.touched }">
+            <mat-error *ngIf="userDetailsForm.get('apellido')?.invalid && userDetailsForm.get('apellido')?.touched">
+              El apellido es requerido.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email"
+                   [ngClass]="{ 'is-invalid': userDetailsForm.get('email')?.invalid && userDetailsForm.get('email')?.touched }">
+            <mat-error *ngIf="userDetailsForm.get('email')?.errors?.['required'] && userDetailsForm.get('email')?.touched">
+              El email es requerido y debe ser válido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Número de Documento</mat-label>
+            <input matInput placeholder="Número de Documento" formControlName="nroDoc"
+                   [ngClass]="{ 'is-invalid': userDetailsForm.get('nroDoc')?.invalid && userDetailsForm.get('nroDoc')?.touched }">
+            <mat-error *ngIf="userDetailsForm.get('nroDoc')?.errors?.['required'] && userDetailsForm.get('nroDoc')?.touched">
+              El número de documento es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Teléfono</mat-label>
+            <input matInput placeholder="Teléfono" formControlName="telefono" [ngClass]="{ 'is-invalid': userDetailsForm.get('telefono')?.invalid && userDetailsForm.get('telefono')?.touched }">
+            <mat-error *ngIf="userDetailsForm.get('telefono')?.invalid && userDetailsForm.get('telefono')?.touched">
+              El teléfono es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="rol" [ngClass]="{ 'is-invalid': userDetailsForm.get('rol')?.invalid && userDetailsForm.get('rol')?.touched }">
+              <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.descripcion }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="userDetailsForm.get('rol')?.invalid && userDetailsForm.get('rol')?.touched">
+              El rol es requerido.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+      
+      <div class="modal-actions">
+        <!-- Mostrar el botón "Editar Usuario" o "Guardar Cambios" según el modo de edición -->
+        <button class="mat-button" color="primary" (click)="isEditMode ? onSaveChanges() : toggleEditMode()" [disabled]="formInvalido">
+            {{ isEditMode ? 'Guardar Cambios' : 'Editar Usuario' }}
+        </button>
+        <!-- Botón para cancelar -->
+        <button class="mat-button" color="warn" *ngIf="isEditMode" (click)="toggleEditMode()">Cancelar</button>
+        <!-- Botón para cerrar el modal -->
+        <button class="mat-button" (click)="onClose()">Cerrar</button>
+    </div>
+    </div>
+  </div>
+  

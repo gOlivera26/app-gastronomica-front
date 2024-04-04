@@ -218,9 +218,9 @@ ul {
   background-color: #212121;
   border-radius: 15px;
   transition: background-color 0.3s ease;
-  overflow: hidden; /* Evitar que el contenido desborde y cause iluminación del fondo */
-  position: relative; /* Asegurar que el pseudo-elemento esté posicionado correctamente */
-  color: white; /* Cambiar el color del texto a blanco */
+  overflow: hidden;
+  position: relative; 
+  color: white; 
 }
 
 .mat-paginator.custom-paginator:hover {

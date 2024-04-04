@@ -32,6 +32,7 @@ import { AuthInterceptor } from '../services/interceptor/interceptor';
 import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles-usuario.component';
 import { ListadoUsuariosComponent } from './listado-usuarios/listado-usuarios.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatTooltip } from '@angular/material/tooltip';
     ResetPasswordComponent,
     VerificationCodeComponent,
     VerDetallesUsuarioComponent,
-    ListadoUsuariosComponent
+    ListadoUsuariosComponent,
+    EditarUsuarioModalComponent
   ],
   imports: [
     BrowserModule,

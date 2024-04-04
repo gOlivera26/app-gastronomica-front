@@ -1,0 +1,85 @@
+/* Estilos para los botones */
+button.mat-button {
+    margin-right: 8px; 
+    border: none; 
+    outline: none; 
+    cursor: pointer; 
+    padding: 8px 16px; 
+    border-radius: 3px; 
+    transition: all 0.3s ease; 
+    font-size: 14px; 
+}
+
+button.mat-button[color="primary"] {
+    background-color: #1976d2; 
+    color: white; 
+}
+
+button.mat-button[color="warn"] {
+    background-color: #d32f2f; 
+    color: white; 
+}
+
+button.mat-button:hover {
+    filter: brightness(0.8); 
+}
+
+button.mat-button:active {
+    transform: translateY(2px); 
+}
+button.mat-button:disabled{
+    background-color: #9e9e9e;
+    color: #ffffff;
+
+}
+
+/* Estilos para los campos del formulario */
+.user-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    grid-template-rows: repeat(3, auto); /* Tres filas */
+    grid-gap: 10px; /* Espacio entre las filas y columnas */
+    margin-top: 20px; /* Margen superior para separar los campos del formulario */
+}
+
+.user-details mat-form-field {
+    width: 100%;
+}
+
+/* Estilos para el modal container */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.900);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    max-width: 40%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 10px;
+}
+
+.modal-actions {
+    margin-top: auto; /* Colocar los botones al final del contenedor */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end; /* Alinear los botones hacia abajo */
+}
+
+h2 {
+    color: white;
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 20px; /* Espacio inferior para separar el título del contenido */
+}

@@ -27,6 +27,11 @@ button.mat-button:hover {
 button.mat-button:active {
     transform: translateY(2px); /* Desplazar ligeramente hacia abajo al hacer clic */
 }
+button.mat-button:disabled{
+    background-color: #9e9e9e;
+    color: #ffffff;
+}
+
 
 /* Estilos para el contenedor del perfil de usuario */
 .user-profile-container {
@@ -95,15 +100,15 @@ button.mat-button:active {
 }
 
 .modal-content {
-    background-color: rgba(0, 0, 0, 0.900); /* Fondo transparente */
+    background-color: rgba(0, 0, 0, 0.900); 
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra para resaltar el modal */
-    max-width: 70%; /* Ancho máximo del contenido del modal */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    max-width: 70%; 
     display: grid;
-    grid-template-columns: auto 1fr; /* Dos columnas, la primera se ajusta automáticamente */
-    grid-template-rows: repeat(3, auto); /* Tres filas */
-    grid-gap: 10px; /* Espacio entre las filas y columnas */
+    grid-template-columns: auto 1fr; 
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 10px;
 }
 
 

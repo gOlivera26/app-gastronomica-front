@@ -51,4 +51,17 @@ export class RestService {
   getUsuarioFiltroActivo(activo: boolean): Observable<any>{
     return this.httpClient.get<boolean>(`${this.baseUrl}/usuarios/obtenerUsuarioPorEstado/${activo}`);
   }
+  getNroDocExiste(nroDoc: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.baseUrl}/usuarios/nroDocExiste/${nroDoc}`);
+  }
+  getEmailExiste(email: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.baseUrl}/usuarios/emailExiste/${email}`);
+  }
+  getUsuarioByRol(idRol: number): Observable<any> {
+    return this.httpClient.get<Usuario>(`${this.baseUrl}/usuarios/obtenerUsuarioPorRol/${idRol}`);
+  }
+  deleteUsuarioByUsername(username: string): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}/usuarios/eliminarUsuario/${username}`);
+  }
+
 }

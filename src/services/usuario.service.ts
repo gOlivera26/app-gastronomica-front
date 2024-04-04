@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { catchError, debounceTime, map, switchMap, tap } from 'rxjs/operators';
 import { Rol, Usuario, updateUsuarioRequest } from '../models/usuario';
 import { RestService } from './rest.service';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class UsuarioService {
 
   private usuariosSubject = new BehaviorSubject<Usuario[]>([]);
   usuarios$: Observable<Usuario[]> = this.usuariosSubject.asObservable();
-
+  
+  private usuarioUpdateSubject = new BehaviorSubject<void>(undefined);
+  usuarioUpdate$: Observable<void> = this.usuarioUpdateSubject.asObservable();
 
   constructor(private httpClient: HttpClient, private restService: RestService) { }
 
@@ -55,8 +58,14 @@ export class UsuarioService {
   }
 
   updateUsuario(usuario: updateUsuarioRequest): Observable<any> {
-    return this.restService.updateUsuario(usuario);
+    return this.restService.updateUsuario(usuario).pipe(
+      tap(() => {
+        this.getUsuarios().subscribe();
+        this.usuarioUpdateSubject.next(); 
+      })
+    )
   }
+  
   getUsuarios(): Observable<Usuario[]> {
     return this.restService.getUsuarios().pipe(
       tap((usuarios: Usuario[]) => {
@@ -64,6 +73,7 @@ export class UsuarioService {
       })
     );
   }
+
   bajaUsuario(nroDoc: string): Observable<boolean> {
     return this.restService.bajaUsuario(nroDoc);
   }
@@ -71,6 +81,41 @@ export class UsuarioService {
     return this.restService.getUsuarioFiltroActivo(activo).pipe(
       tap((usuarios: Usuario[]) =>{
         this.usuariosSubject.next(usuarios);
+      })
+    );
+  }
+  numeroDocumentoValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return of(control.value).pipe(
+        debounceTime(300),
+        switchMap(value => this.restService.getNroDocExiste(value)),
+        map(res => (res ? { numeroDocumentoExist: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
+
+  emailValidator(): AsyncValidatorFn {  
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return of(control.value).pipe(
+        debounceTime(300),
+        switchMap(value => this.restService.getEmailExiste(value)),
+        map(res => (res ? { emailExist: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
+  getUsuarioByRol(idRol: number): Observable<Usuario[]> {
+    return this.restService.getUsuarioByRol(idRol).pipe(
+      tap((usuarios: Usuario[]) => {
+        this.usuariosSubject.next(usuarios);
+      })
+    );
+  }
+  deleteUsuarioByUsername(username: string): Observable<any>{
+    return this.restService.deleteUsuarioByUsername(username).pipe(
+      tap(() => {
+        this.getUsuarios().subscribe();
       })
     );
   }

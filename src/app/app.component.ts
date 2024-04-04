@@ -40,7 +40,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authService.loggedIn$.subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
+      if(localStorage.getItem('token') != null){
+        this.isLoggedIn = isLoggedIn;
+      }
     });
 
     this.router.events.subscribe(event => {

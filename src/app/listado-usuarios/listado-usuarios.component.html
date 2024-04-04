@@ -1,13 +1,24 @@
 <div class="mat-elevation-z8">
+  <div class="filter-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Filtrar por Rol:</mat-label>
+      <mat-select [(ngModel)]="selectedRol" (selectionChange)="buscarPorRol()">
+        <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.descripcion }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button color="warn" *ngIf="selectedRol !== null" (click)="limpiarFiltro()">Limpiar filtro</button>
+
+  
   <div class="filter-buttons">
     <mat-label>Filtrar por Estado:</mat-label>
-    <button mat-button (click)="filtrarUsuariosPorEstado(null)">Quitar filtro</button>
-    <button mat-button (click)="filtrarUsuariosPorEstado(true)">Activo</button>
-    <button mat-button (click)="filtrarUsuariosPorEstado(false)">Desactivado</button>
+  <button mat-button [class.selected]="selectedState === null" *ngIf="selectedState != null" (click)="filtrarUsuariosPorEstado(null)">Quitar filtro</button>
+  <button mat-button [class.selected]="selectedState === true" (click)="filtrarUsuariosPorEstado(true)">Activo</button>
+  <button mat-button [class.selected]="selectedState === false" (click)="filtrarUsuariosPorEstado(false)">Desactivado</button>
   </div>
+  
+</div>
 
   <mat-table [dataSource]="dataSource" matSort class="custom-table">
-
     <!-- Nombre Column -->
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
@@ -29,7 +40,7 @@
     <!-- Email Column -->
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef="let usuario">{{ usuario.email }}</mat-cell>
+      <mat-cell class="email-column" *matCellDef="let usuario">{{ usuario.email }}</mat-cell>
     </ng-container>
 
     <!-- NroDoc Column -->
@@ -46,7 +57,8 @@
 
     <!-- Activo Column -->
     <ng-container matColumnDef="activo">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Activo</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Activo
+      </mat-header-cell>
       <mat-cell *matCellDef="let usuario">
         <button mat-icon-button [color]="usuario.activo ? 'primary' : 'warn'"
                 [matTooltip]="usuario.activo ? 'Desactivar usuario' : 'Activar usuario'"
@@ -56,18 +68,18 @@
       </mat-cell>
     </ng-container>
 
-    <!-- Acciones Column -->
-    <ng-container matColumnDef="acciones">
-      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-      <mat-cell *matCellDef="let usuario">
-        <button mat-icon-button color="primary" (click)="editarUsuario(usuario)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="eliminarUsuario(usuario)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
+   <!-- Acciones Column -->
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let usuario">
+      <button mat-icon-button color="primary" matTooltip="Ver usuario" (click)="verUsuario(usuario)">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" matTooltip="Eliminar usuario" (click)="eliminarUsuario(usuario)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
 
     <ng-container matColumnDef="filtroEstado">
       <mat-header-cell *matHeaderCellDef colspan="8">
@@ -85,5 +97,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+  <mat-paginator class="mat-paginator" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>

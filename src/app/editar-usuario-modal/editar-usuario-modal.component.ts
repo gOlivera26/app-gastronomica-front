@@ -1,22 +1,20 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { VerDetallesUsuarioComponent } from '../ver-detalles-usuario/ver-detalles-usuario.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { Rol, Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-ver-detalles-usuario',
-  templateUrl: './ver-detalles-usuario.component.html',
-  styleUrls: ['./ver-detalles-usuario.component.css']
+  selector: 'app-editar-usuario-modal',
+  templateUrl: './editar-usuario-modal.component.html',
+  styleUrl: './editar-usuario-modal.component.css'
 })
-export class VerDetallesUsuarioComponent implements OnDestroy, OnInit{
+export class EditarUsuarioModalComponent implements OnInit {
   userDetailsForm: FormGroup;
   isEditMode: boolean = false;
   roles: Rol[] = [];
-  userProfileImage: string | ArrayBuffer | null = null;
-  userProfileImageSubscription: Subscription | undefined;
   usuarioId!: number;
   formInvalido: boolean = false;
 
@@ -41,7 +39,7 @@ export class VerDetallesUsuarioComponent implements OnDestroy, OnInit{
         console.error('Error al obtener los roles:', error);
       }
     });
-    
+
     this.usuarioService.getUserProfile(data.username).subscribe({
       next: ({ id, usuario }: { id: number, usuario: Usuario }) => {
         console.log('ID del usuario:', id);
@@ -55,29 +53,14 @@ export class VerDetallesUsuarioComponent implements OnDestroy, OnInit{
         console.error('Error al obtener el perfil del usuario:', error);
       }
     });
-
-    this.getUserProfileImage(data.username); // Obtener la imagen de perfil
-    this.userProfileImageSubscription = this.usuarioService.userProfileImage$.subscribe({
-      next: (image: string | null) => {
-        this.userProfileImage = image;
-      },
-      error: (error) => {
-        console.error('Error al obtener la imagen del perfil:', error);
-      }
-    });
   }
+
   ngOnInit(): void {
     this.userDetailsForm.statusChanges.subscribe(() => {
       this.formInvalido = this.userDetailsForm.invalid;
     });
     
   }
-  ngOnDestroy() {
-    if (this.userProfileImageSubscription) {
-      this.userProfileImageSubscription.unsubscribe();
-    }
-  }
-
   onClose(): void {
     this.dialogRef.close();
   }
@@ -109,6 +92,7 @@ export class VerDetallesUsuarioComponent implements OnDestroy, OnInit{
   }
 
   guardarCambios(): void {
+  
     const usuarioFormValues = this.userDetailsForm.value;
     const usuario = {
       id: this.usuarioId,
@@ -146,54 +130,4 @@ export class VerDetallesUsuarioComponent implements OnDestroy, OnInit{
       console.error('No se puede guardar los cambios: ID de usuario indefinido');
     }
   }
-
-  getUserProfileImage(username: string) {
-    this.usuarioService.getImagenProfile(username).subscribe({
-      next: (data: string) => {
-        this.userProfileImage = 'data:image/jpeg;base64,' + data;
-      },
-      error: (error) => {
-        console.error('Error al obtener la imagen del perfil:', error);
-      }
-    });
-  }
-
-  handleFileInput(event: any) {
-    const file = event.target.files[0];
-    this.handleImageUpload(file);
-  }
-
-  handleImageUpload(file: File) {
-    const username = this.data.username;
-    const formData = new FormData();
-    formData.append('imagen', file);
-  
-    this.usuarioService.putImagenProfile(username, formData).subscribe({
-      next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: '¡Foto de perfil actualizada!',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      },
-      error: (error) => {
-        console.error('Error al subir la imagen de perfil:', error);
-      }
-    });
-  }
-
-  onDrop(event: any) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      this.handleImageUpload(file);
-    }
-  }
-
-  onDragOver(event: any) {
-    event.preventDefault();
-  }
-  
 }
