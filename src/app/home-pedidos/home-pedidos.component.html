@@ -1,0 +1,52 @@
+<div class="container">
+    <!-- Menú lateral -->
+    <div class="menu">
+      <mat-nav-list>
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/home-pedidos-menu">
+            <img src="../../assets/img/menu-hamburguesa.png" alt="Pantalla Principal">
+            Pantalla Principal
+        </a>
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/producto-novedades">
+            <img src="../../assets/img/novedades.png" alt="Novedades">
+            Novedades
+        </a>
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/menu-hamburguesas">
+            <img src="../../assets/img/menu-hamburguesa.png" alt="Hamburguesas">
+            Hamburguesas
+        </a>
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/complementos">
+            <img src="../../assets/img/menu-hamburguesa.png" alt="Complementos">
+            Complementos
+        </a>
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/postres">
+            <img src="../../assets/img/menu-hamburguesa.png" alt="Postres">
+            Postres
+        </a>
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/bebidas">
+            <img src="../../assets/img/menu-hamburguesa.png" alt="Bebidas">
+            Bebidas
+        </a>
+      </mat-nav-list>
+    </div>
+    <!-- Contenido principal -->
+    <div class="content-wrapper">
+      <div class="content">
+       <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <div class="total-price">
+      <div *ngFor="let item of productosSeleccionados; let i = index">
+        <div>
+          <strong>Producto: </strong> {{ item.producto.nombre }} X: {{ item.cantidad }}
+          <button mat-icon-button (click)="eliminarProducto(i)">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+      <strong>Total: </strong> ${{total}}
+    </div>
+  
+</div>
+
+

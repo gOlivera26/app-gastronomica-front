@@ -33,6 +33,13 @@ import { VerDetallesUsuarioComponent } from './ver-detalles-usuario/ver-detalles
 import { ListadoUsuariosComponent } from './listado-usuarios/listado-usuarios.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
+import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
+import { HomePedidosComponent } from './home-pedidos/home-pedidos.component';
+import { HomeProductosComponent } from './home-productos/home-productos.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { CommonModule } from '@angular/common';
+import { HomePedidosMenuComponent } from './home.pedidos-pantalla-principal/home.pedidos-menu.component';
+import { HomePedidosMenuHamburguesasComponent } from './home-pedidos-menu-hamburguesas/home-pedidos-menu-hamburguesas.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +51,17 @@ import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuar
     VerificationCodeComponent,
     VerDetallesUsuarioComponent,
     ListadoUsuariosComponent,
-    EditarUsuarioModalComponent
+    EditarUsuarioModalComponent,
+    AgregarUsuarioComponent,
+    HomePedidosComponent,
+    HomeProductosComponent,
+    HomePedidosMenuComponent,
+    HomePedidosMenuHamburguesasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
@@ -70,7 +83,8 @@ import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuar
     MatCardModule,
     MatMenuModule,
     MatMenuModule,
-    MatTooltip
+    MatTooltip,
+    MatSidenavModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -32,7 +32,6 @@ button.mat-button:disabled{
     color: #ffffff;
 }
 
-
 /* Estilos para el contenedor del perfil de usuario */
 .user-profile-container {
     display: flex;

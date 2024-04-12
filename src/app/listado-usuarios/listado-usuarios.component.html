@@ -11,11 +11,10 @@
   
   <div class="filter-buttons">
     <mat-label>Filtrar por Estado:</mat-label>
-  <button mat-button [class.selected]="selectedState === null" *ngIf="selectedState != null" (click)="filtrarUsuariosPorEstado(null)">Quitar filtro</button>
-  <button mat-button [class.selected]="selectedState === true" (click)="filtrarUsuariosPorEstado(true)">Activo</button>
-  <button mat-button [class.selected]="selectedState === false" (click)="filtrarUsuariosPorEstado(false)">Desactivado</button>
+  <button mat-button (click)="filtrarUsuariosPorEstado(true)">Activo</button>
+  <button mat-button (click)="filtrarUsuariosPorEstado(false)">Desactivado</button>
   </div>
-  
+  <button mat-button color="warn"  *ngIf="selectedState != null" (click)="filtrarUsuariosPorEstado(null)">Quitar filtro</button>
 </div>
 
   <mat-table [dataSource]="dataSource" matSort class="custom-table">
@@ -53,6 +52,12 @@
     <ng-container matColumnDef="telefono">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</mat-header-cell>
       <mat-cell *matCellDef="let usuario">{{ usuario.telefono }}</mat-cell>
+    </ng-container>
+
+    <!-- Rol Column -->
+    <ng-container matColumnDef="rol">
+      <mat-header-cell *matHeaderCellDef>Rol</mat-header-cell>
+      <mat-cell *matCellDef="let usuario">{{ usuario.rolDescripcion }}</mat-cell>
     </ng-container>
 
     <!-- Activo Column -->

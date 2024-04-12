@@ -39,7 +39,7 @@ mat-label{
   margin-bottom: 15px;
 }
 .custom-table{
-  /*añadir borde y sombreado a la tabla*/
+
   background-color: #eeeeee92; 
   border-collapse: collapse;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

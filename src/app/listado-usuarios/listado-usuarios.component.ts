@@ -16,7 +16,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class ListadoUsuariosComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'username', 'email', 'nroDoc', 'telefono', 'activo', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'username', 'email', 'nroDoc', 'telefono', 'rol', 'activo', 'acciones'];
   dataSource = new MatTableDataSource<Usuario>();
   roles: Rol[] = [];
   selectedRol: number | null = null;
@@ -57,6 +57,13 @@ export class ListadoUsuariosComponent implements OnInit, OnDestroy {
     if (this.selectedRol !== null) {
       this.usuariosSubscription = this.usuarioService.getUsuarioByRol(this.selectedRol).subscribe({
         next: (usuarios: Usuario[]) => {
+          // Combinar información del usuario con la información del rol
+          usuarios.forEach(usuario => {
+            const rol = this.roles.find(r => r.id === usuario.rol.id);
+            if (rol) {
+              usuario.rolDescripcion = rol.descripcion;
+            }
+          });
           this.updateDataSource(usuarios);
         },
         error: error => {
@@ -67,6 +74,13 @@ export class ListadoUsuariosComponent implements OnInit, OnDestroy {
     } else {
       this.usuariosSubscription = this.usuarioService.getUsuarios().subscribe({
         next: (usuarios: Usuario[]) => {
+          // Combinar información del usuario con la información del rol
+          usuarios.forEach(usuario => {
+            const rol = this.roles.find(r => r.id === usuario.rol.id);
+            if (rol) {
+              usuario.rolDescripcion = rol.descripcion;
+            }
+          });
           this.updateDataSource(usuarios);
         },
         error: error => {
@@ -76,6 +90,7 @@ export class ListadoUsuariosComponent implements OnInit, OnDestroy {
       });
     }
   }
+  
 
   updateDataSource(usuarios: Usuario[]): void {
     this.dataSource.data = usuarios;
@@ -169,7 +184,7 @@ export class ListadoUsuariosComponent implements OnInit, OnDestroy {
     if (activo === null) {
       this.usuarioService.getUsuarios().subscribe({
         next: (usuarios: Usuario[]) => {
-          this.updateDataSource(usuarios);
+          this.actualizarUsuariosConRoles(usuarios);
         },
         error: error => {
           console.log('Error al obtener todos los usuarios:', error);
@@ -179,7 +194,7 @@ export class ListadoUsuariosComponent implements OnInit, OnDestroy {
     } else {
       this.usuarioService.getUsuarioFiltroActivo(activo).subscribe({
         next: (usuarios: Usuario[]) => {
-          this.updateDataSource(usuarios);
+          this.actualizarUsuariosConRoles(usuarios);
         },
         error: error => {
           console.log('Error al obtener usuarios filtrados por estado:', error);
@@ -187,6 +202,16 @@ export class ListadoUsuariosComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+  
+  actualizarUsuariosConRoles(usuarios: Usuario[]): void {
+    usuarios.forEach(usuario => {
+      const rol = this.roles.find(r => r.id === usuario.rol.id);
+      if (rol) {
+        usuario.rolDescripcion = rol.descripcion;
+      }
+    });
+    this.updateDataSource(usuarios);
   }
 
   loadRoles(): void {

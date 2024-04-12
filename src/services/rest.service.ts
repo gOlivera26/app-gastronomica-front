@@ -22,8 +22,13 @@ export class RestService {
   resetPassword(request : UpdateCredentialsRequest): Observable<UpdateCredentialsRequest>{
     return this.httpClient.post<UpdateCredentialsRequest>(`${this.baseUrl}/auth/reset-password`, request);
   }
+
   updatePassword(request: UpdateCredentialsResponse): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/auth/update-password`, request, { responseType: 'text' });
+  }
+
+  postUsuario(usuario: Usuario): Observable<any>{
+    return this.httpClient.post(`${this.baseUrl}/auth/registerUsuario`, usuario);
   }
 
   //usuario service
@@ -57,11 +62,21 @@ export class RestService {
   getEmailExiste(email: string): Observable<boolean> {
     return this.httpClient.get<boolean>(`${this.baseUrl}/usuarios/emailExiste/${email}`);
   }
+  getUsernameExiste(username: string):Observable<boolean>{
+    return this.httpClient.get<boolean>(`${this.baseUrl}/usuarios/usernameExiste/${username}`)
+  }
   getUsuarioByRol(idRol: number): Observable<any> {
     return this.httpClient.get<Usuario>(`${this.baseUrl}/usuarios/obtenerUsuarioPorRol/${idRol}`);
   }
   deleteUsuarioByUsername(username: string): Observable<any> {
     return this.httpClient.delete(`${this.baseUrl}/usuarios/eliminarUsuario/${username}`);
   }
-
+  
+  //producto
+  getProductos(): Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/producto/obtenerProductos`);
+  }
+  getTipoProductos(): Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/producto/obtenerTipoProductos`);
+  }
 }

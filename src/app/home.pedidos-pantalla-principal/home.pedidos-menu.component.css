@@ -1,0 +1,78 @@
+
+
+.productos-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.832); 
+}
+
+.titulo {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 60px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.carousel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.card {
+    flex-basis: calc(33.3% - 20px); 
+    margin: 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; 
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    text-align: center;
+    font-style:italic;
+}
+
+.card p {
+    margin: 5px 0;
+}
+.novedades-titulo {
+    font-size: 1.9em;
+    font-weight: bold;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.novedades-card {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    width: 600px;
+    height: auto;
+}
+.novedades-card img {
+    width: 100%; 
+    height: auto; 
+    max-height: 200px; 
+    border-radius: 10px;
+}

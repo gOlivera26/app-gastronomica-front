@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: flex-start; 
+    margin-left: 0; 
+}
+
+.menu{
+    width: auto; 
+    background-color: rgba(255, 255, 255, 0.832); 
+    padding: 20px;
+    margin: 0; 
+    margin-top: 30px;
+    overflow-y: auto;
+    border-radius: 20px;
+}
+    .menu .menu-link {
+    padding: 50px 60px; 
+    width: auto; /* Hace que el ancho se ajuste automáticamente al contenido */
+}
+
+.menu .menu-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Color de fondo al pasar el mouse */
+}
+
+
+.content-wrapper {
+    margin-top: 30px;
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Agregamos scroll si el contenido es demasiado largo */
+    display: flex; 
+    align-items: stretch; /* Alinear los elementos a lo largo del eje transversal */
+}
+
+.content {
+    flex: 1; 
+    color: black;
+}
+
+.menu .menu-link img {
+    width: 60px; /* Ancho de la imagen */
+    height: auto; 
+    border-radius: 50%;
+    margin-right: 10px; 
+}
+
+.total-price {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px; /* Aumentar el ancho para dar más espacio */
+    background-color: rgba(255, 255, 255, 0.9); /* Hacer el color de fondo más claro */
+    padding: 20px; /* Aumentar el espacio interno */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.total-price button {
+    color: red;
+    padding: 5px;
+}
+
+.total-price button:hover {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease; 
+}

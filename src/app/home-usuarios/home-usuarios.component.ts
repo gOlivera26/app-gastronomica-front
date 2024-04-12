@@ -14,7 +14,7 @@ export class HomeUsuariosComponent implements AfterViewInit {
 
   currentManagement: string = 'Usuarios';
   listLink: string = '/listar-usuarios';
-  addLink: string = '#agregar-usuario';
+  addLink: string = '/agregar-usuario';
 
   descriptions: { [key: string]: { list: string; listDetails: string; add: string; addDetails: string; extras?: string; }; } = {
     'Usuarios': {
@@ -77,7 +77,7 @@ export class HomeUsuariosComponent implements AfterViewInit {
       this.currentManagement = this.managements[event.pageIndex];
       if (this.currentManagement === 'Usuarios') {
         this.listLink = '/listar-usuarios';
-        this.addLink = '#agregar-usuario';
+        this.addLink = '/agregar-usuario';
       } else if (this.currentManagement === 'Clientes') {
         this.listLink = '/listar-clientes';
         this.addLink = '#agregar-cliente';

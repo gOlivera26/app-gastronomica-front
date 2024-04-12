@@ -10,6 +10,7 @@ export interface Usuario {
     activo: boolean;
     verificationCode: string;
     rol: Rol; 
+    rolDescripcion: string;
     imagenProfile: string; 
   }
   

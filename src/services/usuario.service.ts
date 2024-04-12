@@ -65,6 +65,14 @@ export class UsuarioService {
       })
     )
   }
+  postUsuario(usuario: Usuario): Observable<any>{
+    return this.restService.postUsuario(usuario).pipe(
+      tap(() => {
+        this.getUsuarios().subscribe();
+        this.usuarioUpdateSubject.next();
+      })
+    )
+  }
   
   getUsuarios(): Observable<Usuario[]> {
     return this.restService.getUsuarios().pipe(
@@ -105,6 +113,17 @@ export class UsuarioService {
       );
     };
   }
+  usernameValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return of(control.value).pipe(
+        debounceTime(300),
+        switchMap(value => this.restService.getUsernameExiste(value)),
+        map(res => (res ? { usernameExist: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
+  
   getUsuarioByRol(idRol: number): Observable<Usuario[]> {
     return this.restService.getUsuarioByRol(idRol).pipe(
       tap((usuarios: Usuario[]) => {

@@ -2,11 +2,11 @@
   <button mat-button routerLink="/homeUser" *ngIf="isLoggedIn">
     Home
   </button>
-  <button mat-button routerLink="/componente1" *ngIf="isLoggedIn">
-    Componente 1
+  <button mat-button *ngIf="isLoggedIn" [matMenuTriggerFor]="usuariosMenu">
+    Gestionar Usuarios <mat-icon>arrow_drop_down</mat-icon>
   </button>
-  <button mat-button routerLink="/componente2" *ngIf="isLoggedIn">
-    Componente 2
+  <button mat-button routerLink="/homePedidos/home-pedidos-menu" *ngIf="isLoggedIn">
+    Home Pedidos
   </button>
   <button mat-button routerLink="/componente3" *ngIf="isLoggedIn">
     Componente 3
@@ -40,4 +40,14 @@
     <strong>{{ username }}</strong>
   </button>
   <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+</mat-menu>
+
+ <!-- Menú desplegable para las herramientas de usuarios -->
+ <mat-menu #usuariosMenu="matMenu">
+  <button mat-menu-item routerLink="/listar-usuarios">
+    Listar Usuarios
+  </button>
+  <button mat-menu-item routerLink="/agregar-usuario">
+    Agregar Usuario
+  </button>
 </mat-menu>
