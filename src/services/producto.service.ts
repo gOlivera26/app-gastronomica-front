@@ -24,7 +24,23 @@ export class ProductoService {
       })
     )
   }
+
+  getProductoPorTipo(idProducto: number):Observable<Producto[]>{
+    return this.restService.getProductoPorTipo(idProducto).pipe(
+      tap((productos: Producto[]) =>{
+        this.productoSubject.next(productos);
+      })
+    )
+  }
+  getProductoNovedad():Observable<Producto[]>{
+    return this.restService.getProductoNovedades().pipe(
+      tap((productos: Producto[]) =>{
+        this.productoSubject.next(productos);
+      })
+    )
+  }
   
+
   getTipoProductos(): Observable<TipoProducto[]>{
     return this.restService.getTipoProductos().pipe(
       tap((tipoProductos: TipoProducto[]) => {

@@ -40,6 +40,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { HomePedidosMenuComponent } from './home.pedidos-pantalla-principal/home.pedidos-menu.component';
 import { HomePedidosMenuHamburguesasComponent } from './home-pedidos-menu-hamburguesas/home-pedidos-menu-hamburguesas.component';
+import { ConfirmarPedidoComponent } from './confirmar-pedido/confirmar-pedido.component';
+import { HomePedidosMenuComplementosComponent } from './home-pedidos-menu-complementos/home-pedidos-menu-complementos.component';
+import { HomePedidosMenuPostresComponent } from './home-pedidos-menu-postres/home-pedidos-menu-postres.component';
+import { HomePedidosMenuNovedadesComponent } from './home-pedidos-menu-novedades/home-pedidos-menu-novedades.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { HomePedidosMenuHamburguesasComponent } from './home-pedidos-menu-hambur
     HomePedidosComponent,
     HomeProductosComponent,
     HomePedidosMenuComponent,
-    HomePedidosMenuHamburguesasComponent
+    HomePedidosMenuHamburguesasComponent,
+    ConfirmarPedidoComponent,
+    HomePedidosMenuComplementosComponent,
+    HomePedidosMenuPostresComponent,
+    HomePedidosMenuNovedadesComponent
   ],
   imports: [
     BrowserModule,

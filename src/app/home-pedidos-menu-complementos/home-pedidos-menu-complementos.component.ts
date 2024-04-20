@@ -1,22 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
 import { CarritoService } from '../../services/carrito.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-home-pedidos-menu-hamburguesas',
-  templateUrl: './home-pedidos-menu-hamburguesas.component.html',
-  styleUrl: './home-pedidos-menu-hamburguesas.component.css'
+  selector: 'app-home-pedidos-menu-complementos',
+  templateUrl: './home-pedidos-menu-complementos.component.html',
+  styleUrl: './home-pedidos-menu-complementos.component.css'
 })
-export class HomePedidosMenuHamburguesasComponent implements OnInit{
+export class HomePedidosMenuComplementosComponent {
   productos!: Producto[];
   @Output() productoAgregado = new EventEmitter<Producto>();
 
   constructor(private productoService: ProductoService, private carritoService: CarritoService) { }
 
   ngOnInit(): void {
-    this.productoService.getProductoPorTipo(1).subscribe(productos => {
+    this.productoService.getProductoPorTipo(3).subscribe(productos => {
       this.productos = productos;
     });
   }

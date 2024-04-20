@@ -9,6 +9,9 @@ import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.compo
 import { HomePedidosComponent } from './home-pedidos/home-pedidos.component';
 import { HomePedidosMenuComponent } from './home.pedidos-pantalla-principal/home.pedidos-menu.component';
 import { HomePedidosMenuHamburguesasComponent } from './home-pedidos-menu-hamburguesas/home-pedidos-menu-hamburguesas.component';
+import { HomePedidosMenuComplementosComponent } from './home-pedidos-menu-complementos/home-pedidos-menu-complementos.component';
+import { HomePedidosMenuPostresComponent } from './home-pedidos-menu-postres/home-pedidos-menu-postres.component';
+import { HomePedidosMenuNovedadesComponent } from './home-pedidos-menu-novedades/home-pedidos-menu-novedades.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,7 +21,10 @@ const routes: Routes = [
   {path: 'agregar-usuario' , component:AgregarUsuarioComponent, canActivate:[AuthGuard]},
   {path: 'homePedidos', component: HomePedidosComponent, canActivate:[AuthGuard], children:[
     {path: 'home-pedidos-menu', component: HomePedidosMenuComponent},
-    {path: 'menu-hamburguesas', component: HomePedidosMenuHamburguesasComponent}
+    {path: 'menu-hamburguesas', component: HomePedidosMenuHamburguesasComponent},
+    {path: 'menu-complementos', component: HomePedidosMenuComplementosComponent},
+    {path: 'menu-postres', component:HomePedidosMenuPostresComponent},
+    {path: 'menu-novedades', component:HomePedidosMenuNovedadesComponent}
   ]}
 ];
 

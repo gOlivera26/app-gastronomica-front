@@ -58,11 +58,14 @@
 }
 
 .total-price button {
-    color: red;
-    padding: 5px;
+    margin-left: 15px;
 }
 
 .total-price button:hover {
     transform: scale(1.1); 
     transition: transform 0.3s ease; 
+}
+
+.btn-confirmar{
+    background-color: #eedb05; 
 }

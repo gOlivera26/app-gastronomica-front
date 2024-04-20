@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Producto, ProductoSeleccionado } from '../models/producto';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Pedido } from '../models/pedido';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,11 @@ export class CarritoService {
   private carritoSubject = new BehaviorSubject<ProductoSeleccionado[]>([]);
   carrito$: Observable<ProductoSeleccionado[]> = this.carritoSubject.asObservable();
 
-  constructor() { }
+  private pedido: Pedido[] = [];
+  private pedidoSubject = new BehaviorSubject<Pedido[]>([]);
+  pedido$: Observable<Pedido[]> = this.pedidoSubject.asObservable();
+
+  constructor(private restService: RestService) { }
 
   agregarAlCarrito(producto: Producto): void {
     const productoEnCarrito = this.carrito.find(item => item.producto.id === producto.id);
@@ -27,6 +33,7 @@ export class CarritoService {
     }
   
     this.carritoSubject.next(this.carrito);
+    console.log(this.carrito);
   }
 
   eliminarDelCarrito(index: number): void {
@@ -38,4 +45,15 @@ export class CarritoService {
     this.carrito = producto;
     this.carritoSubject.next(this.carrito);
   }
+
+  vaciarCarrito(): void {
+    this.carrito = [];
+    this.carritoSubject.next(this.carrito);
+  }
+  
+  //pedido
+  crearPedido(pedido: any): Observable<any>{
+    return this.restService.postPedido(pedido);
+  }
+
 }

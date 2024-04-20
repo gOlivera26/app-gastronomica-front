@@ -1,0 +1,23 @@
+<mat-dialog-content [formGroup]="formularioPedido" class="form-content">
+    <h2 mat-dialog-title>Confirmar Pedido</h2>
+    <div class="form-field">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Dirección de entrega:</mat-label>
+        <input matInput formControlName="direccionEntrega">
+        <mat-error *ngIf="formularioPedido.get('direccionEntrega')?.invalid && formularioPedido.get('direccionEntrega')?.touched">
+          La dirección de entrega es requerida.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Observación:</mat-label>
+        <textarea matInput formControlName="observacion"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirmar()">Confirmar Pedido</button>
+  </mat-dialog-actions>
+  

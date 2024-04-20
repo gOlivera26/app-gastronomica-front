@@ -7,6 +7,7 @@ export interface Producto{
     imagen: string;
     cantidad: number;
     tipoProducto: TipoProducto;
+    novedad: boolean;
 }
 
 export interface TipoProducto{

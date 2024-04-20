@@ -76,7 +76,20 @@ export class RestService {
   getProductos(): Observable<any>{
     return this.httpClient.get(`${this.baseUrl}/producto/obtenerProductos`);
   }
+  getProductoPorTipo(idProducto: number): Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/producto/obtenerProductoPorTipo/${idProducto}`);
+  }
+  getProductoNovedades(): Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/producto/obtenerProductoNovedad`);
+  }
+
   getTipoProductos(): Observable<any>{
     return this.httpClient.get(`${this.baseUrl}/producto/obtenerTipoProductos`);
   }
+
+  //pedido
+  postPedido(request: any): Observable<any>{
+    return this.httpClient.post(`${this.baseUrl}/pedidos/crearPedido`, request);
+  }
+
 }

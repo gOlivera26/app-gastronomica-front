@@ -6,7 +6,7 @@
             <img src="../../assets/img/menu-hamburguesa.png" alt="Pantalla Principal">
             Pantalla Principal
         </a>
-        <a class="menu-link" mat-list-item routerLink="/homePedidos/producto-novedades">
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/menu-novedades">
             <img src="../../assets/img/novedades.png" alt="Novedades">
             Novedades
         </a>
@@ -14,17 +14,13 @@
             <img src="../../assets/img/menu-hamburguesa.png" alt="Hamburguesas">
             Hamburguesas
         </a>
-        <a class="menu-link" mat-list-item routerLink="/homePedidos/complementos">
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/menu-complementos">
             <img src="../../assets/img/menu-hamburguesa.png" alt="Complementos">
             Complementos
         </a>
-        <a class="menu-link" mat-list-item routerLink="/homePedidos/postres">
+        <a class="menu-link" mat-list-item routerLink="/homePedidos/menu-postres">
             <img src="../../assets/img/menu-hamburguesa.png" alt="Postres">
             Postres
-        </a>
-        <a class="menu-link" mat-list-item routerLink="/homePedidos/bebidas">
-            <img src="../../assets/img/menu-hamburguesa.png" alt="Bebidas">
-            Bebidas
         </a>
       </mat-nav-list>
     </div>
@@ -40,11 +36,12 @@
         <div>
           <strong>Producto: </strong> {{ item.producto.nombre }} X: {{ item.cantidad }}
           <button mat-icon-button (click)="eliminarProducto(i)">
-            <mat-icon>remove_circle</mat-icon>
+            <mat-icon color="warn">remove_circle</mat-icon>
           </button>
         </div>
       </div>
       <strong>Total: </strong> ${{total}}
+      <button mat-raised-button class="btn-confirmar"  *ngIf="total > 0" (click)="confirmarCompra()">Confirmar compra</button>
     </div>
   
 </div>
