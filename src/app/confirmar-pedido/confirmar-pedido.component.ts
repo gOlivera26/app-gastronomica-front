@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ProductoSeleccionado } from '../../models/producto';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-confirmar-pedido',
@@ -8,26 +10,32 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./confirmar-pedido.component.css']
 })
 export class ConfirmarPedidoComponent {
-  @Output() confirmarPedido = new EventEmitter<{ direccionEntrega: string, observacion: string }>();
+  @Input() productosSeleccionados: ProductoSeleccionado[] = [];
+  @Input() total: number = 0;
+  @Output() confirmarPedido = new EventEmitter<{nombreCliente: string}>();
 
   formularioPedido: FormGroup;
+  numeroDocumento: string;
 
-  constructor(private dialogRef: MatDialogRef<ConfirmarPedidoComponent>, private formBuilder: FormBuilder) {
-    this.formularioPedido = this.formBuilder.group({
-      direccionEntrega: ['', Validators.required],
-      observacion: ['']
+  constructor(private dialogRef: MatDialogRef<ConfirmarPedidoComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder) {
+    this.productosSeleccionados = data.productosSeleccionados || [];
+    this.total = data.total || 0;
+
+    this.formularioPedido= this.formBuilder.group({
+      nombreCliente:['']
     });
+    this.numeroDocumento = this.data.numeroDocumento;
   }
-
-  onConfirmar() {
-    if (this.formularioPedido.valid) {
-      const { direccionEntrega, observacion } = this.formularioPedido.value;
-      this.confirmarPedido.emit({ direccionEntrega, observacion });
+  
+  onConfirmar(): void {
+    if(this.formularioPedido.valid){
+      this.confirmarPedido.emit({nombreCliente: this.formularioPedido.get('nombreCliente')?.value });
       this.dialogRef.close();
     }
   }
-
+  
   onCancel() {
     this.dialogRef.close();
   }
+
 }

@@ -1,0 +1,12 @@
+<mat-dialog-content>
+    <h2>Por favor, si es cliente registrado, ingrese su <strong>número de documento</strong>:</h2>
+    <mat-form-field>
+      <input matInput placeholder="Número de documento" [(ngModel)]="numeroDocumento">
+    </mat-form-field>
+    <p>Si no es cliente registrado, por favor haga click <a class="registro-link" (click)="mostrarRegistro()">aquí</a></p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="confirmar()">Confirmar</button>
+  </mat-dialog-actions>
+  

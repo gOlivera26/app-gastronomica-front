@@ -1,0 +1,69 @@
+<div class="container">
+    <h2><strong>Registrar cliente</strong></h2>
+    <div class="mat-elevation-z8 form-container">
+        <form [formGroup]="userForm" (ngSubmit)="crearUsuario()" class="example-form">
+            <div class="form-row">
+                <div class="form-column">
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="Nombre" formControlName="nombre"
+                            [ngClass]="{ 'is-invalid': userForm.get('nombre')?.invalid && userForm.get('nombre')?.touched }">
+                        <mat-error *ngIf="userForm.get('nombre')?.invalid && userForm.get('nombre')?.touched">
+                            El nombre es requerido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-column">
+                    <mat-form-field>
+                        <mat-label>Apellido</mat-label>
+                        <input matInput placeholder="Apellido" formControlName="apellido"
+                            [ngClass]="{ 'is-invalid': userForm.get('apellido')?.invalid && userForm.get('apellido')?.touched }">
+                        <mat-error *ngIf="userForm.get('apellido')?.invalid && userForm.get('apellido')?.touched">
+                            El apellido es requerido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-column">
+                    <mat-form-field>
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput placeholder="Teléfono" formControlName="telefono"
+                            [ngClass]="{ 'is-invalid': userForm.get('telefono')?.invalid && userForm.get('telefono')?.touched }">
+                        <mat-error *ngIf="userForm.get('telefono')?.invalid && userForm.get('telefono')?.touched">
+                            El teléfono es requerido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-column">
+                    <mat-form-field>
+                        <mat-label>Número de Documento</mat-label>
+                        <input matInput placeholder="Número de Documento" formControlName="nroDoc"
+                            [ngClass]="{ 'is-invalid': userForm.get('nroDoc')?.invalid && userForm.get('nroDoc')?.touched }">
+                        <mat-error *ngIf="userForm.get('nroDoc')?.invalid && userForm.get('nroDoc')?.touched">
+                            El número de documento es requerido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-column">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email"
+                            [ngClass]="{ 'is-invalid': userForm.get('email')?.invalid && userForm.get('email')?.touched }">
+                        <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                            El email es requerido y debe ser válido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="button-container">
+                <button mat-raised-button color="primary" type="submit" [disabled]="formInvalido"
+                    class="submit-button">Crear Cliente</button>
+                <button mat-raised-button color="warn" type="button" class="submit-button cancel-button"
+                    (click)="confirmarSalir()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

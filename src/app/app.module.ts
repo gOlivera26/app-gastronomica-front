@@ -44,6 +44,9 @@ import { ConfirmarPedidoComponent } from './confirmar-pedido/confirmar-pedido.co
 import { HomePedidosMenuComplementosComponent } from './home-pedidos-menu-complementos/home-pedidos-menu-complementos.component';
 import { HomePedidosMenuPostresComponent } from './home-pedidos-menu-postres/home-pedidos-menu-postres.component';
 import { HomePedidosMenuNovedadesComponent } from './home-pedidos-menu-novedades/home-pedidos-menu-novedades.component';
+import { ConfirmarPedidoEnvioComponent } from './confirmar-pedido-envio/confirmar-pedido-envio.component';
+import { AsociarClienteModalComponent } from './asociar-cliente-modal/asociar-cliente-modal.component';
+import { AgregarClienteModalComponent } from './agregar-cliente-modal/agregar-cliente-modal.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,10 @@ import { HomePedidosMenuNovedadesComponent } from './home-pedidos-menu-novedades
     ConfirmarPedidoComponent,
     HomePedidosMenuComplementosComponent,
     HomePedidosMenuPostresComponent,
-    HomePedidosMenuNovedadesComponent
+    HomePedidosMenuNovedadesComponent,
+    ConfirmarPedidoEnvioComponent,
+    AsociarClienteModalComponent,
+    AgregarClienteModalComponent
   ],
   imports: [
     BrowserModule,

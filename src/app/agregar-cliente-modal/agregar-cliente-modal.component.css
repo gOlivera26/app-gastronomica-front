@@ -1,0 +1,41 @@
+.container {
+    width: 100%;
+    max-width: 600px; /* Limita el ancho del contenedor para que no se vea muy extendido */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center; /* Centra el título */
+  }
+  
+  .form-container {
+    background-color: #f5f5f5; /* Color de fondo del formulario */
+    padding: 20px;
+    border-radius: 10px; /* Agrega esquinas redondeadas al formulario */
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos de la fila de manera uniforme */
+    margin-bottom: 15px; /* Espacio entre las filas */
+  }
+  
+  .form-column {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    margin-right: 10px; /* Espacio entre las columnas */
+  }
+  
+  mat-form-field {
+    width: 100%; /* Ocupa todo el ancho disponible */
+  }
+  
+  .button-container {
+    text-align: center; /* Centra los botones */
+    margin-top: 20px; /* Espacio superior entre los botones y el resto del formulario */
+  }
+  
+  .submit-button {
+    margin-right: 10px; /* Espacio entre los botones */
+  }
+  

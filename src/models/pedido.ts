@@ -7,6 +7,7 @@ export interface Pedido {
     detallePedido: DetallePedido[];
     estado: string;
     total: number;
+    nombreCliente: string;
 }
 
 export interface DetallePedido {
@@ -26,6 +27,7 @@ export interface PedidoResponse {
     observacion: string;
     total: number;
     detallePedido: DetallePedidoResponse[];
+    nombreCliente: string;
 }
 
 export interface DetallePedidoResponse {

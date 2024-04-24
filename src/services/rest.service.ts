@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ForgotPasswordRequest, ForgotPasswordResponse, LoginRequest, LoginResponse, UpdateCredentialsRequest, UpdateCredentialsResponse } from '../models/models';
 import { Usuario, updateUsuarioRequest } from '../models/usuario';
+import { Cliente } from '../models/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +91,15 @@ export class RestService {
   //pedido
   postPedido(request: any): Observable<any>{
     return this.httpClient.post(`${this.baseUrl}/pedidos/crearPedido`, request);
+  }
+
+
+  //cliente
+  getClientePorNroDoc(nroDoc: string): Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/cliente/getCliente/${nroDoc}`);
+  }
+  postCliente(cliente: Cliente): Observable<any>{
+    return this.httpClient.post(`${this.baseUrl}/cliente/postCliente`, cliente);
   }
 
 }
