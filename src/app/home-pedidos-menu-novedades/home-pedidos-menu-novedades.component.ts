@@ -21,7 +21,6 @@ export class HomePedidosMenuNovedadesComponent {
       this.productos = productos;
     });
   }
-  
 
   agregarAlCarrito(producto: Producto): void {
     Swal.fire({
